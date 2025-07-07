@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #fff0f5;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .container {
+      position: relative;
+      display: inline-block;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .main-image {
+      max-width: 90vw;
+      max-height: 70vh;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+    }
+
+    h2 {
+      margin-top: 10px;
+      font-size: 1.5rem;
+      color: #b03060;
+      animation: fadeInText 2s ease-in-out;
+    }
+
+    /* Flower style */
+    .flower {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0);
+      animation: pop 1s forwards ease-in-out;
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInText {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 1.2rem;
+      }
+      .flower {
+        width: 25px;
+        height: 25px;
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="kungtau.mp3">
+</head>
+<body>
+
+  <!-- Background music -->
+  <audio autoplay loop>
+    <source src="kungtau.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div style="text-align: center;" class="container" id="image-container">
+    <img class="main-image" src="kungtautalaga.jpg" alt="My Image">
+    <h2>Kung Tayo Talaga</h2>
+  </div>
+
+  <script>
+    const container = document.getElementById("image-container");
+
+    function createFlower() {
+      const flower = document.createElement("img");
+      flower.src = "flower.png"; // Replace with your flower image
+      flower.className = "flower";
+
+      const x = Math.random() * container.offsetWidth;
+      const y = Math.random() * container.offsetHeight;
+
+      flower.style.left = `${x}px`;
+      flower.style.top = `${y}px`;
+
+      container.appendChild(flower);
+
+      setTimeout(() => container.removeChild(flower), 1000);
+    }
+
+    setInterval(createFlower, 500);
+  </script>
+
+</body>
+</html>
